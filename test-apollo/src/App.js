@@ -10,11 +10,20 @@ import { gql } from 'graphql-tag';
 //   }`
 
 const scandiWebQuery = gql`
-  query {
-    categories {
+# Write your query or mutation here
+query {
+  categories {
+    name
+    products {
       name
+      inStock
+      description
+      gallery
     }
   }
+}
+
+
 `
 
 export default class App extends Component {
@@ -38,9 +47,10 @@ export default class App extends Component {
 
               return(
                   <ul>
-                    {data.categories.map((category) => {
-                      return <li>{category.name}</li>
+                    {data.categories.map((category, i = category.index) => {
+                      return <li key={i}>{category.name}</li>
                     })}
+                    {console.log(data)}
                   </ul>
                 )
             }
